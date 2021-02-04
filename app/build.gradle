@@ -3,16 +3,18 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    ext.appNameSpace = "com.matrimony"
+    ext.appName = "MatrimonyApp"
+    compileSdkVersion rootProject.ext.compiler_sdk_ver
+    buildToolsVersion rootProject.ext.build_tool_ver
 
     defaultConfig {
-        applicationId "com.matrimony"
-        minSdkVersion 23
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.min_sdk_ver
+        targetSdkVersion rootProject.ext.target_sdk_ver
+        applicationId appNameSpace
         versionCode 1
         versionName "1.0"
-
+        setProperty("archivesBaseName", appName + " " + "-v" + versionName + "-vc" + versionCode)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -22,9 +24,32 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled true
+    }
+    flavorDimensions "star"
+
+    productFlavors {
+        production {
+
+            buildConfigField 'String', 'API_SERVER', rootProject.ext.productionServer
+        }
+
     }
 }
 
@@ -33,7 +58,21 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    testImplementation 'junit:junit:4.+'
+    testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.coordinatorlayout:coordinatorlayout:1.1.0"
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    /** transport layer protocol helper retrofit **/
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+
 }

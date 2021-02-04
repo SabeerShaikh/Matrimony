@@ -1,8 +1,10 @@
-package com.matrimony;
+package com.matrimony.module.ui.mainscreen.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.matrimony.R;
 
 public class MainActivity extends AppCompatActivity {
 

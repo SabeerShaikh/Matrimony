@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Matrimony</string>
+    <string name="please_connect_to_internet">Please check internet connection.</string>
 </resources>
