@@ -40,4 +40,5 @@ public class Result implements Serializable {
 
     @SerializedName("nat")
     public String nat;
+
 }

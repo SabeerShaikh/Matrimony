@@ -1,11 +1,11 @@
 package com.matrimony.config;
 
 import android.app.Application;
-import android.util.Log;
 
-import com.matrimony.module.base.MatrimonyViewModelFactory;
 import com.matrimony.BuildConfig;
-
+import com.matrimony.domain.repository.MetrimonyRepository;
+import com.matrimony.domain.repository.MetrimonyRepositoryImpl;
+import com.matrimony.domain.repository.remote.api.MetrimonyService;
 import com.matrimony.module.base.MatrimonyViewModelFactory;
 
 import org.jetbrains.annotations.NotNull;
@@ -83,7 +83,7 @@ public class MatrimonyProducationDI implements DI {
                         .client(provideOkHttpClient())
                         .baseUrl(BuildConfig.API_SERVER)
                         .build();
-                Log.d("DataDailyForcast", "" + singletonRetrofit);
+
             }
         }
         return singletonRetrofit;
@@ -100,5 +100,14 @@ public class MatrimonyProducationDI implements DI {
     }
 
 
+    @Override
+    public MetrimonyRepository provideMetrimonyRepository() {
+        return new MetrimonyRepositoryImpl(provideMetrimonyService(),provideApplication());
+    }
+
+    @Override
+    public MetrimonyService provideMetrimonyService() {
+        return provideRetrofit().create(MetrimonyService.class);
+    }
 
 }

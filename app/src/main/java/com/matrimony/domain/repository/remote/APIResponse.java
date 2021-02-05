@@ -17,9 +17,9 @@ public class APIResponse<T> {
     @SerializedName("data")
     private T data;
 
-    public static com.weatherforecat.domain.repository.remote.APIResponse map(String json) {
+    public static APIResponse map(String json) {
         Gson gson = new Gson();
-        return gson.fromJson(json, com.weatherforecat.domain.repository.remote.APIResponse.class);
+        return gson.fromJson(json, APIResponse.class);
     }
 
     public int getCode() {

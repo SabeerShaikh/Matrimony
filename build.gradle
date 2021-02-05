@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.productionServer = '"https://randomuser.me/api/"'
+    ext.productionServer = '"https://randomuser.me/"'
     ext.compiler_sdk_ver = 30
     ext.build_tool_ver = "30.0.2"
     ext.min_sdk_ver = 16
