@@ -1,7 +1,6 @@
 package com.matrimony.module.ui.mainscreen.viewmodel;
 
 import android.app.Application;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -12,6 +11,7 @@ import com.matrimony.domain.repository.MetrimonyRepository;
 import com.matrimony.module.base.MMViewModelResponse;
 import com.matrimony.module.base.MatrimonyViewModel;
 import com.matrimony.module.ui.mainscreen.adapter.model.UIMembers;
+import com.matrimony.module.utils.Const;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class MainScreenViewModel extends MatrimonyViewModel {
             uiMembers.postcode = result.location.postcode;
             uiMembers.imageUrl = result.picture.large;
             uiMembers.age = result.dob.age;
-            uiMembers.acceptOrDeclined = "Not Yet";
+            uiMembers.acceptOrDeclined = Const.Status.PENDING;
 
             insert(uiMembers);
 

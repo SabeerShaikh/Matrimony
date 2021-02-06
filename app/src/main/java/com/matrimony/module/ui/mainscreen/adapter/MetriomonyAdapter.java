@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.matrimony.R;
 import com.matrimony.databinding.ItemMetrimonyUserBinding;
 import com.matrimony.module.ui.mainscreen.adapter.model.UIMembers;
+import com.matrimony.module.utils.Const;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -72,18 +73,18 @@ public class MetriomonyAdapter extends
     }
 
     public void updateStatus(MetrimonyViewHolder vh, String status) {
-        if (status.equals("Accepted")) {
+        if (status.equals(Const.Status.ACCEPTED)) {
             vh.vbinding.tvMessage.setVisibility(View.VISIBLE);
             vh.vbinding.tvMessage.setText(R.string.accepted);
             vh.vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.green));
             vh.vbinding.loActionButton.setVisibility(View.GONE);
-        } else if (status.equals("Declined")) {
+        } else if (status.equals(Const.Status.DECLINED)) {
 
             vh.vbinding.tvMessage.setVisibility(View.VISIBLE);
             vh.vbinding.tvMessage.setText(R.string.declined);
             vh.vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.red));
             vh.vbinding.loActionButton.setVisibility(View.GONE);
-        } else if (status.equals("Not Yet")) {
+        } else if (status.equals(Const.Status.PENDING)) {
             vh.vbinding.tvMessage.setVisibility(View.GONE);
             vh.vbinding.loActionButton.setVisibility(View.VISIBLE);
 
@@ -108,7 +109,7 @@ public class MetriomonyAdapter extends
         public void onClickAccept() {
             UIMembers uiMembers = uiMembersArrayList.get(getAdapterPosition());
             uiMembers.position = getAdapterPosition();
-            uiMembers.acceptOrDeclined = "Accepted";
+            uiMembers.acceptOrDeclined = Const.Status.ACCEPTED;
             vbinding.tvMessage.setVisibility(View.VISIBLE);
             vbinding.tvMessage.setText(R.string.accepted);
             vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.green));
@@ -122,7 +123,7 @@ public class MetriomonyAdapter extends
 
             UIMembers uiMembers = uiMembersArrayList.get(getAdapterPosition());
             uiMembers.position = getAdapterPosition();
-            uiMembers.acceptOrDeclined = "Declined";
+            uiMembers.acceptOrDeclined = Const.Status.DECLINED;
 
             vbinding.tvMessage.setVisibility(View.VISIBLE);
             vbinding.tvMessage.setText(R.string.declined);
