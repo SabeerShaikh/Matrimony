@@ -1,7 +1,6 @@
 package com.matrimony.module.ui.mainscreen.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,22 +38,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel = (new ViewModelProvider(MainActivity.this, di.provideViewModelFactory())).get(MainScreenViewModel.class);
 
         init();
-        if (Networkchecker.isNetworkAvailable(this)) {
-            if (viewModel.getAllData() != null) {
-                viewModel.deleteAllPlayers();
-            }
-            loadAllData();
-        } else {
-            viewModel.getAllUIMembers().observe(this, new Observer<List<UIMembers>>() {
-                @Override
-                public void onChanged(List<UIMembers> uiMembersList) {
-                    metriomonyAdapter.appendData(uiMembersList);
-
-                }
-            });
-
-
-        }
+        loadAllData();
+        setData();
 
     }
 
@@ -88,19 +73,24 @@ public class MainActivity extends AppCompatActivity {
         if (Networkchecker.isNetworkAvailable(this)) {
             viewModel.getAllData().observe(this, vmResponse -> {
                 showloader(false);
-                if (vmResponse.success) {
-                    if (vmResponse.response != null) {
-                        metriomonyAdapter.appendData(vmResponse.response);
-
-                        //  vBinding.setCurrent(vmResponse.response.current);
-                    }
-                }
             });
-            vBinding.rvAllData.setAdapter(metriomonyAdapter);
 
         } else {
             showloader(false);
 
         }
+    }
+
+    public void setData() {
+
+        viewModel.getAllUIMembers().observe(this, new Observer<List<UIMembers>>() {
+            @Override
+            public void onChanged(List<UIMembers> uiMembersList) {
+                metriomonyAdapter.clearData();
+                metriomonyAdapter.appendData(uiMembersList);
+
+            }
+        });
+        vBinding.rvAllData.setAdapter(metriomonyAdapter);
     }
 }

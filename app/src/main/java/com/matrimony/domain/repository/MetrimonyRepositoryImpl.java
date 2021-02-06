@@ -71,7 +71,14 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
     public void insert(UIMembers uiMembers) {
        // Log.d("TAG",""+uiMembers.secondName);
 
-        new InsertPlayerAsyncTask(membersDao).execute(uiMembers);
+        new InsertMembersAsyncTask(membersDao).execute(uiMembers);
+    }
+
+    @Override
+    public void insertAll(List<UIMembers> uiMembersList) {
+        // Log.d("TAG",""+uiMembers.secondName);
+
+        //new InsertPlayerAsyncTask(membersDao).execute(uiMembers);
     }
 
     @Override
@@ -85,7 +92,7 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
     }
 
     @Override
-    public void deleteAllPlayers() {
+    public void deleteAllMembers() {
         new DeleteAllPlayersAsyncTask(membersDao).execute();
     }
 
@@ -94,12 +101,30 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
         return allMembers;
     }
 
-    //AsyncTask for create new player
-    private static class InsertPlayerAsyncTask extends AsyncTask<UIMembers, Void, Void> {
+  /*  private static class InsertALLMembersAsyncTask extends AsyncTask<List<UIMembers>, Void, Void> {
 
         private MembersDAO memberDao;
 
-        public InsertPlayerAsyncTask(MembersDAO memberDao) {
+
+        public InsertMembersAsyncTask(MembersDAO memberDao) {
+            this.memberDao = memberDao;
+        }
+
+
+        @Override
+        protected Void doInBackground(List<UIMembers uiMembers) {
+            //Log.d("TAG",""+uiMembers.length);
+            memberDao.insert(uiMembers[0]);
+            return null;
+        }
+    }*/
+
+    private static class InsertMembersAsyncTask extends AsyncTask<UIMembers, Void, Void> {
+
+        private MembersDAO memberDao;
+
+
+        public InsertMembersAsyncTask(MembersDAO memberDao) {
             this.memberDao = memberDao;
         }
 
@@ -112,7 +137,6 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
         }
     }
 
-    //AsyncTask for update existing player
     private static class UpdatePlayerAsyncTask extends AsyncTask<UIMembers, Void, Void> {
 
         private MembersDAO memberDao;

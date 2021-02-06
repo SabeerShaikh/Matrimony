@@ -3,5 +3,7 @@
     <string name="please_connect_to_internet">Please check internet connection.</string>
     <string name="matched_name">%s: %s %s</string>
     <string name="matched_details">%s, %s, %s, %s, %s, %s</string>
+    <string name="declined">Member declined</string>
+    <string name="accepted">Member accepted</string>
 
 </resources>

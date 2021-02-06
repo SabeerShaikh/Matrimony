@@ -14,11 +14,13 @@ public interface MetrimonyRepository {
 
     void insert(UIMembers uiMembers);
 
+    void insertAll(List<UIMembers> uiMembersList);
+
     void update(UIMembers uiMembers);
 
     void delete(UIMembers uiMembers);
 
-    void deleteAllPlayers();
+    void deleteAllMembers();
 
     LiveData<List<UIMembers>> getAllUIMembers();
 

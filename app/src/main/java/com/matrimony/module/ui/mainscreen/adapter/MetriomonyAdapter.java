@@ -37,8 +37,12 @@ public class MetriomonyAdapter extends
     }
 
     public void appendData(List<UIMembers> list) {
-        this.uiMembersArrayList.addAll(list);
-        notifyDataSetChanged();
+        if (!uiMembersArrayList.contains(list)) {
+            this.uiMembersArrayList.addAll(list);
+            //notifyDataSetChanged();
+            notifyItemRangeChanged(uiMembersArrayList.size(), list.size());
+
+        }
 
     }
 
@@ -70,16 +74,16 @@ public class MetriomonyAdapter extends
     public void updateStatus(MetrimonyViewHolder vh, String status) {
         if (status.equals("Accepted")) {
             vh.vbinding.tvMessage.setVisibility(View.VISIBLE);
-            vh.vbinding.tvMessage.setText("Member accepted");
+            vh.vbinding.tvMessage.setText(R.string.accepted);
             vh.vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.green));
             vh.vbinding.loActionButton.setVisibility(View.GONE);
         } else if (status.equals("Declined")) {
 
             vh.vbinding.tvMessage.setVisibility(View.VISIBLE);
-            vh.vbinding.tvMessage.setText("Member declined");
+            vh.vbinding.tvMessage.setText(R.string.declined);
             vh.vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.red));
             vh.vbinding.loActionButton.setVisibility(View.GONE);
-        } else if (status.equals("Not Yet")){
+        } else if (status.equals("Not Yet")) {
             vh.vbinding.tvMessage.setVisibility(View.GONE);
             vh.vbinding.loActionButton.setVisibility(View.VISIBLE);
 
@@ -106,10 +110,10 @@ public class MetriomonyAdapter extends
             uiMembers.position = getAdapterPosition();
             uiMembers.acceptOrDeclined = "Accepted";
             vbinding.tvMessage.setVisibility(View.VISIBLE);
-            vbinding.tvMessage.setText("Member accepted");
+            vbinding.tvMessage.setText(R.string.accepted);
             vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.green));
             vbinding.loActionButton.setVisibility(View.GONE);
-            notifyItemChanged(getAdapterPosition());
+            //notifyItemChanged(getAdapterPosition());
             onAcceptClick.postValue(uiMembers);
 
         }
@@ -121,11 +125,11 @@ public class MetriomonyAdapter extends
             uiMembers.acceptOrDeclined = "Declined";
 
             vbinding.tvMessage.setVisibility(View.VISIBLE);
-            vbinding.tvMessage.setText("Member declined");
+            vbinding.tvMessage.setText(R.string.declined);
             vbinding.tvMessage.setTextColor(context.getResources().getColor(R.color.red));
             vbinding.loActionButton.setVisibility(View.GONE);
-            notifyItemChanged(getAdapterPosition());
-            onAcceptClick.postValue(uiMembers);
+            //notifyItemChanged(getAdapterPosition());
+            onDeclinedClick.postValue(uiMembers);
 
         }
 

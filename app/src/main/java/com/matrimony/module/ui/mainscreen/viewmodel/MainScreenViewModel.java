@@ -25,15 +25,11 @@ public class MainScreenViewModel extends MatrimonyViewModel {
         repository = di.provideMetrimonyRepository();
         allUIMembers = repository.getAllUIMembers();
 
-
-
     }
 
     public LiveData<MMViewModelResponse<List<UIMembers>>> getAllData() {
 
         return Transformations.map(repository.getAllData(10), repoResponse -> {
-            Log.d("Data", "-----" + repoResponse.repositoryResponse);
-
             if (repoResponse.success) {
 
                 return new MMViewModelResponse<>(mapperMemberInfoToUIMembers(repoResponse.repositoryResponse.results));
@@ -63,14 +59,12 @@ public class MainScreenViewModel extends MatrimonyViewModel {
 
             uiMembersArrayList.add(uiMembers);
         });
-        Log.d("TAG", "inserted1"+getAllUIMembers());
 
         return uiMembersArrayList;
     }
 
     public void insert(UIMembers uiMembers) {
         repository.insert(uiMembers);
-        Log.d("TAG", "inserted123"+getAllUIMembers());
 
     }
 
@@ -82,12 +76,12 @@ public class MainScreenViewModel extends MatrimonyViewModel {
         repository.delete(uiMembers);
     }
 
-    public void deleteAllPlayers() {
-        repository.deleteAllPlayers();
+    public void deleteAllMembers() {
+        repository.deleteAllMembers();
     }
 
     public LiveData<List<UIMembers>> getAllUIMembers() {
-        Log.d("TAG", "inserted123"+allUIMembers);
+
         return allUIMembers;
     }
 }

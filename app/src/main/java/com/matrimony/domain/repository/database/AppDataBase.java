@@ -2,6 +2,7 @@ package com.matrimony.domain.repository.database;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -23,10 +24,11 @@ public abstract class AppDataBase extends RoomDatabase {
         if (instance == null) {
             //If instance is null that's mean database is not created and create a new database instance
             instance = Room.databaseBuilder(context.getApplicationContext(), AppDataBase.class, "matrimony")
-                    .fallbackToDestructiveMigration()
                     .addCallback(roomCallBack)
                     .build();
         }
+        Log.d("TAG", "Create Database"+instance);
+
 
         return instance;
     }
@@ -36,10 +38,10 @@ public abstract class AppDataBase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
+            Log.d("TAG", "Create Database");
 
         }
     };
-
 
 
 }

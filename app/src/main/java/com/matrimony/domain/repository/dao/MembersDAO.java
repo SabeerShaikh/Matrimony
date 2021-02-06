@@ -16,6 +16,9 @@ public interface MembersDAO {
     @Insert
     void insert(UIMembers uiMembers);
 
+    @Insert
+    void insertAll(List<UIMembers> uiMembers);
+
     @Update
     void update(UIMembers uiMembers);
 
