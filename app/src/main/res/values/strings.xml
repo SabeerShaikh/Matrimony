@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Matrimony</string>
+    <string name="app_name">Matrimony APP</string>
     <string name="please_connect_to_internet">Please check internet connection.</string>
     <string name="matched_name">%s: %s %s</string>
     <string name="matched_details">%s, %s, %s, %s, %s, %s</string>

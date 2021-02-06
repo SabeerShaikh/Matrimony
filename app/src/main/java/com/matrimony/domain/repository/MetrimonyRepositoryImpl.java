@@ -2,7 +2,6 @@ package com.matrimony.domain.repository;
 
 import android.app.Application;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -34,7 +33,7 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
         membersDao = appDataBase.membersDAO();
         allMembers = membersDao.getAllData();
 
-//        Log.d("TAG", "inserted111" + allMembers.getValue().size());
+//       Log.d("TAG", "inserted111" + allMembers.getValue().size());
 
     }
 
@@ -66,10 +65,9 @@ public class MetrimonyRepositoryImpl implements MetrimonyRepository {
         return result;
     }
 
-
     @Override
     public void insert(UIMembers uiMembers) {
-       // Log.d("TAG",""+uiMembers.secondName);
+        // Log.d("TAG",""+uiMembers.secondName);
 
         new InsertMembersAsyncTask(membersDao).execute(uiMembers);
     }
